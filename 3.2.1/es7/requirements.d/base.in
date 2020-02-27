@@ -1,0 +1,5 @@
+oarepo[deploy-es7,heartbeat,acls,files,models,includes]~=3.2.1
+Babel>=2.4.0
+Flask-BabelEx>=0.9.3
+lxml>=3.5.0,<4.2.6
+marshmallow>=3.0.0,<4.0.0

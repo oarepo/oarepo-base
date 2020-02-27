@@ -1,0 +1,72 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2020 CESNET.
+#
+# Oarepo Docker is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+# Backend services for needed for development.
+#
+# Usage::
+#
+#   $ docker-compose up -d
+#   $ ./conf/wait-for-services.sh
+#
+# Following services are included:
+# - Cache: Redis (exposed port: 6379)
+# - DB: (PostgresSQL/MySQL) (exposed port: 5432 or 3306)
+# - Message queue: RabbitMQ (exposed ports: 5672, 15672)
+# - Elasticsearch (exposed ports: 9200, 9300)
+#
+version: '2.3'
+volumes:
+  archived_data:
+  uploaded_data:
+services:
+  deploy-oarepo:
+    user: root
+    extends:
+      file: docker-services.yml
+      service: app
+    command: [ "deploy" ]
+    environment:
+      - "APP_ENABLE_SECURE_HEADERS=${APP_ENABLE_SECURE_HEADERS}"
+      - "SERVER_NAME=${SERVER_NAME}"
+      - "OAREPO_ADMIN_PASSWORD=${OAREPO_ADMIN_PASSWORD}"
+      - "OAREPO_ADMIN_USER=${OAREPO_ADMIN_USER}"
+      - "INVENIO_SQLALCHEMY_DATABASE_URI=${INVENIO_SQLALCHEMY_DATABASE_URI}"
+      - "INVENIO_BROKER_URL=${INVENIO_BROKER_URL}"
+      - "INVENIO_CELERY_BROKER_URL=${INVENIO_CELERY_BROKER_URL}"
+      - "INVENIO_CACHE_TYPE=${INVENIO_CACHE_TYPE}"
+      - "INVENIO_CACHE_REDIS_URL=${INVENIO_CACHE_REDIS_URL}"
+      - "INVENIO_ACCOUNTS_SESSION_REDIS_URL=${INVENIO_ACCOUNTS_SESSION_REDIS_URL}"
+      - "INVENIO_CELERY_RESULT_BACKEND=${INVENIO_CELERY_RESULT_BACKEND}"
+      - "INVENIO_RATELIMIT_STORAGE_URL=${INVENIO_RATELIMIT_STORAGE_URL}"
+      - "INVENIO_SEARCH_ELASTIC_HOSTS=${INVENIO_SEARCH_ELASTIC_HOSTS}"
+    image: oarepo:3.2.1-es7
+    ports:
+      - "5000"
+    volumes:
+      - uploaded_data:/opt/invenio/var/instance/data
+      - archived_data:/opt/invenio/var/instance/archive
+    links:
+      - cache
+      - es
+      - mq
+      - db
+  cache:
+    extends:
+      file: docker-services.yml
+      service: cache
+  db:
+    extends:
+      file: docker-services.yml
+      service: db
+  mq:
+    extends:
+      file: docker-services.yml
+      service: mq
+  es:
+    extends:
+      file: docker-services.yml
+      service: es7
