@@ -32,23 +32,10 @@ services:
     command: [ "uwsgi" ]
     ports:
       - "5000"
-    environment:
-      - "APP_ENABLE_SECURE_HEADERS=${APP_ENABLE_SECURE_HEADERS}"
-      - "SERVER_NAME=${SERVER_NAME}"
-      - "OAREPO_ADMIN_PASSWORD=${OAREPO_ADMIN_PASSWORD}"
-      - "OAREPO_ADMIN_USER=${OAREPO_ADMIN_USER}"
-      - "INVENIO_SQLALCHEMY_DATABASE_URI=${INVENIO_SQLALCHEMY_DATABASE_URI}"
-      - "INVENIO_BROKER_URL=${INVENIO_BROKER_URL}"
-      - "INVENIO_CELERY_BROKER_URL=${INVENIO_CELERY_BROKER_URL}"
-      - "INVENIO_CACHE_TYPE=${INVENIO_CACHE_TYPE}"
-      - "INVENIO_CACHE_REDIS_URL=${INVENIO_CACHE_REDIS_URL}"
-      - "INVENIO_ACCOUNTS_SESSION_REDIS_URL=${INVENIO_ACCOUNTS_SESSION_REDIS_URL}"
-      - "INVENIO_CELERY_RESULT_BACKEND=${INVENIO_CELERY_RESULT_BACKEND}"
-      - "INVENIO_RATELIMIT_STORAGE_URL=${INVENIO_RATELIMIT_STORAGE_URL}"
-      - "INVENIO_SEARCH_ELASTIC_HOSTS=${INVENIO_SEARCH_ELASTIC_HOSTS}"
     volumes:
       - uploaded_data:/opt/invenio/var/instance/data
       - archived_data:/opt/invenio/var/instance/archive
+      - static_data:/opt/invenio/var/instance/static
     links:
       - cache
       - es

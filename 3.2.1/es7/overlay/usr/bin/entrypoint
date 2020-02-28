@@ -6,7 +6,7 @@ cmd=$1
 
 run_post_install_hooks() {
   # execute post install scripts
-  for f in /etc/post_install.d/*.sh; do
+  for f in /etc/pre_run.d/*.sh; do
     if ! bash "$f" -H; then
       echo "failed to execute: ${f}. exiting..."
       exit 1
@@ -24,19 +24,6 @@ case $cmd in
   ;;
 "deploy")
   export DEPLOY=True
-  export SERVER_NAME=${SERVER_NAME:-"127.0.0.1:5001"}
-  export APP_ENABLE_SECURE_HEADERS=${APP_ENABLE_SECURE_HEADERS:-False}
-# TODO: create invenio.cfg template with pythonic configuration values
-#  export APP_DEFAULT_SECURE_HEADERS = {
-#    'content_security_policy': {
-#      'default-src': [
-#          '\'self\'',
-#      ],
-#      'script-src': [
-#          '\'sha256-eWKugvnGzWDg1/cLEtGsYUa2Gmocx1sNVm/kWiIxkC0=\'',
-#      ]
-#    }
-#  }
   run_post_install_hooks
   uwsgi /etc/uwsgi/uwsgi_rest.ini
   ;;
