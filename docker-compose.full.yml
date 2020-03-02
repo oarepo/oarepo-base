@@ -52,7 +52,7 @@ services:
     extends:
       file: docker-services.yml
       service: app
-    image: oarepo:3.2.1-es7
+    image: "oarepo-base:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
     command: [ "uwsgi" ]
     ports:
       - "5000"

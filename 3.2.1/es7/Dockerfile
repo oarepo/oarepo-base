@@ -19,7 +19,7 @@ LABEL maintainer="CESNET <bauer@cesnet.cz>" \
   org.label-schema.name="OpenAccess repository site" \
   org.label-schema.vendor="CESNET" \
   org.label-schema.schema-version="1.0" \
-  org.label-schema.vcs-url="https://github.com/oarepo/oarepo-docker" \
+  org.label-schema.vcs-url="https://github.com/oarepo/oarepo-base" \
   org.label-schema.version="$OAREPO_VERSION"
 
 RUN pip install pip-tools

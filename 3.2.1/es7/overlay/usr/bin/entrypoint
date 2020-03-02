@@ -25,6 +25,5 @@ case $cmd in
 "deploy")
   export DEPLOY=True
   run_post_install_hooks
-  uwsgi /etc/uwsgi/uwsgi_rest.ini
   ;;
 esac

@@ -1,5 +1,5 @@
-# oarepo-docker
-[![Build Status](https://travis-ci.org/oarepo/oarepo-docker.svg?branch=master)](https://travis-ci.org/oarepo/oarepo-docker) [![image](https://img.shields.io/docker/automated/oarepo/oarepo-docker.svg)](https://hub.docker.com/r/oarepo/oarepo-docker/) [![image](https://img.shields.io/docker/build/oarepo/oarepo-docker.svg)](https://hub.docker.com/r/oarepo/oarepo-docker/builds/)
+# oarepo-base
+[![Build Status](https://travis-ci.org/oarepo/oarepo-base.svg?branch=master)](https://travis-ci.org/oarepo/oarepo-base) [![image](https://img.shields.io/docker/automated/oarepo/oarepo-base.svg)](https://hub.docker.com/r/oarepo/oarepo-base/) [![image](https://img.shields.io/docker/build/oarepo/oarepo-base.svg)](https://hub.docker.com/r/oarepo/oarepo-base/builds/)
 
 Base Docker image for building and running OArepo instances.
 
@@ -26,12 +26,14 @@ This image follows the versioning of Invenio.
 
 ## Supported tags and respective ``Dockerfile`` links
 
-* 3.2.1-es7 - [Dockerfile](https://github.com/oarepo/oarepo-docker/blob/master/3.2.1/es7/Dockerfile).
+* 3.2.1-es7 - [Dockerfile](https://github.com/oarepo/oarepo-base/blob/master/3.2.1/es7/Dockerfile).
 
 ### Environment variables
 
-The following environment variables are available by default (see [.env-example](https://github.com/oarepo/oarepo-docker/blob/master/.env-example)):
+The following environment variables are available by default (see [.env-example](https://github.com/oarepo/oarepo-base/blob/master/.env-example)):
 
+- ``OAREPO_VERSION=3.2.1``
+- ``OAREPO_ES_VERSION=es7``
 - ``WORKING_DIR=/opt/invenio``
 - ``INVENIO_INSTANCE_PATH=/opt/invenio/var/instance``
 - ``INVENIO_USER_ID=1000``
@@ -63,7 +65,7 @@ To deploy the OArepo instance for a first time on your infrastructure, run the
 image with the `deploy` command within a correct environment:
 
 ```
-docker run oarepo deploy
+docker run oarepo-base deploy
 ```
 
 This will prepare the database tables for Invenio, initialize ElasticSearch indices and
@@ -74,17 +76,17 @@ message queues.
 To quickly try things out in a local environment the following compose files are prepared:
 
 ```
-docker-compose -f docker-compose.deploy.yml
+docker-compose -f docker-compose.deploy.yml up
 ```
 Runs the basic Invenio infrastracture and executes the OArepo deployment scripts on it.
 
 ```
-docker-compose -f docker-compose.yml
+docker-compose -f docker-compose.yml up -d
 ```
 After OArepo is deployed, you can use this to run the instance with just a minimal set of services.
 
 ```
-docker-compose -f docker-compose.full.yml
+docker-compose -f docker-compose.full.yml up -d
 ```
 Spins up a full production-like infrastructure for OArepo. 
 
@@ -106,7 +108,7 @@ Replicate the following overlay folder structure within your project:
 
 Then base your Dockerfile on this image:
 ```
-FROM oarepo/oarepo-docker:3.2.1-es7
+FROM oarepo/oarepo-base:3.2.1-es7
 ```
 
 ### Python Requirements

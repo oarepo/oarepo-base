@@ -9,11 +9,13 @@ version: '2.3'
 services:
   app:
     build:
-      context: 3.2.1/es7
+      context: "${OAREPO_VERSION}/${OAREPO_ES_VERSION}/"
       args:
         - ENVIRONMENT=DEV
-    image: oarepo:3.2.1-es7
+    image: "oarepo-base:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
     environment:
+      - OAREPO_VERSION
+      - OAREPO_ES_VERSION
       - APP_ALLOWED_HOSTS
       - APP_ENABLE_SECURE_HEADERS
       - SERVER_NAME

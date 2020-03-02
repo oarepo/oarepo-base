@@ -22,6 +22,7 @@ version: '2.3'
 volumes:
   archived_data:
   uploaded_data:
+  static_data:
 services:
   deploy-oarepo:
     user: root
@@ -29,7 +30,7 @@ services:
       file: docker-services.yml
       service: app
     command: [ "deploy" ]
-    image: oarepo:3.2.1-es7
+    image: "oarepo-base:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
     ports:
       - "5000"
     volumes:
