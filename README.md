@@ -76,7 +76,7 @@ message queues.
 To quickly try things out in a local environment the following compose files are prepared:
 
 ```
-docker-compose -f docker-compose.deploy.yml up
+docker-compose -f docker-compose.deploy.yml up --abort-on-container-exit
 ```
 Runs the basic Invenio infrastracture and executes the OArepo deployment scripts on it.
 

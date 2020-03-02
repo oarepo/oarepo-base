@@ -1,0 +1,50 @@
+language: python
+
+matrix:
+  fast_finish: true
+
+python:
+  - 3.6
+
+services: docker
+
+env:
+  global:
+    - OAREPO_ADMIN_PASSWORD=Tr4vi1SWasH3r3!
+    - OAREPO_ADMIN_USER=admin@oarepo.org
+    - INVENIO_SECRET_KEY=This1SSoooS3cr#t
+    - INVENIO_WSGI_PROXIES=2
+    - INVENIO_SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://oarepo:oarepo@db/oarepo
+    - INVENIO_BROKER_URL=amqp://guest:guest@mq:5672/
+    - INVENIO_CACHE_TYPE=redis
+    - INVENIO_ACCOUNTS_SESSION_REDIS_URL=redis://cache:6379/1
+    - INVENIO_CACHE_REDIS_URL=redis://cache:6379/0
+    - INVENIO_RATELIMIT_STORAGE_URL=redis://cache:6379/3
+    - INVENIO_CELERY_BROKER_URL=amqp://guest:guest@mq:5672/
+    - INVENIO_CELERY_RESULT_BACKEND=redis://cache:6379/2
+    - INVENIO_SEARCH_ELASTIC_HOSTS='es:9200'
+    - INVENIO_CELERY_LOG_LEVEL=INFO
+    - SERVER_NAME=127.0.0.1:5001
+    - JSONSCHEMAS_HOST=cesnet.cz
+    - APP_ALLOWED_HOSTS=frontend,localhost,127.0.1.1
+    - SEARCH_INDEX_PREFIX=oarepo-
+
+  matrix:
+    - OAREPO_VERSION=3.2.1 OAREPO_ES_VERSION=es7
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+  - docker-compose --version
+  - docker-compose pull
+  - docker-compose build
+
+script:
+  - docker-compose -f docker-compose.deploy.yml up --abort-on-container-exit
+  - docker-compose start
+  - docker ps
+  - docker-compose stop
+  - docker-compose -f docker-compose.deploy.yml start
+  - docker ps
+  - curl -k -sSf https://localhost/ping
+  - docker-compose stop
