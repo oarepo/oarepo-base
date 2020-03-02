@@ -36,8 +36,8 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
   - docker-compose --version
-  - docker-compose pull
-  - docker-compose build
+  - docker-compose -f docker-compose.deploy.yml build
+  - docker-compose -f docker-compose.full.yml build
 
 script:
   - docker-compose -f docker-compose.deploy.yml up --abort-on-container-exit
