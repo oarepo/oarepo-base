@@ -34,7 +34,7 @@ env:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
   - docker-compose --version
   - docker-compose pull
   - docker-compose build
@@ -44,7 +44,7 @@ script:
   - docker-compose start
   - docker ps
   - docker-compose stop
-  - docker-compose -f docker-compose.deploy.yml start
+  - docker-compose -f docker-compose.full.yml start
   - docker ps
   - curl -k -sSf https://localhost/ping
-  - docker-compose stop
+  - docker-compose -f docker-compose.full.yml stop
