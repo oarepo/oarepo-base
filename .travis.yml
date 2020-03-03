@@ -46,5 +46,5 @@ script:
   - docker-compose stop
   - docker-compose -f docker-compose.full.yml start
   - docker ps
-  - curl -k -sSf https://localhost/ping
+  - timeout 50 bash -c 'while [[ "$(curl -k -sf -o /dev/null -w ''%{http_code}'' https://localhost/.well-known/heartbeat/liveliness)" != "200" ]]; do sleep 5; done'
   - docker-compose -f docker-compose.full.yml stop
