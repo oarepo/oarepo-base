@@ -10,6 +10,7 @@ services: docker
 
 env:
   global:
+    - LIVELINESS_TIMEOUT=300
     - OAREPO_ADMIN_PASSWORD=Tr4vi1SWasH3r3!
     - OAREPO_ADMIN_USER=admin@oarepo.org
     - INVENIO_SECRET_KEY=This1SSoooS3cr#t
@@ -38,6 +39,7 @@ before_install:
   - docker-compose --version
   - docker-compose -f docker-compose.deploy.yml build
   - docker-compose -f docker-compose.full.yml build
+  - docker-compose -f docker-compose.full.yml up --no-start
 
 script:
   - docker-compose -f docker-compose.deploy.yml up --abort-on-container-exit
@@ -46,5 +48,5 @@ script:
   - docker-compose stop
   - docker-compose -f docker-compose.full.yml start
   - docker ps
-  - timeout 200 bash -c 'while [[ "$(curl -k -sf -o /dev/null -w ''%{http_code}'' https://localhost/.well-known/heartbeat/liveliness)" != "200" ]]; do sleep 5; done'
+  - timeout ${LIVELINESS_TIMEOUT} bash -c 'while [[ "$(curl -k -sf -o /dev/null -w ''%{http_code}'' https://localhost/.well-known/heartbeat/liveliness)" != "200" ]]; do docker ps; sleep 5; done'
   - docker-compose -f docker-compose.full.yml stop
