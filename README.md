@@ -19,6 +19,7 @@ The image is based on the official Invenio Docker image ``inveniosoftware/centos
     * `models` for basic DC data models with marshmallow
     * `includes` for composable ES mappings support
     * `ui` for API endpoints for UI clients
+    * `taxonomies` for taxonomic trees support
 
 ## Versioning
 

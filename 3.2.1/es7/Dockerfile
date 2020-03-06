@@ -44,3 +44,4 @@ ENTRYPOINT [ "/usr/bin/entrypoint" ]
 
 USER root
 RUN chown invenio /usr/bin/entrypoint && chmod u+x /usr/bin/entrypoint
+USER invenio

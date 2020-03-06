@@ -16,7 +16,7 @@ if [ "$DEPLOY" = "True" ]; then
   echo "> Initializing ES indices..."
 
   # Check if ES has already indices created and is healthy
-  indicnt=$(invenio index list | grep -v '^$' | wc -l)
+  indicnt=$(curl -sS http://es:9200/_cat/indices | wc -l)
   if [ $indicnt -gt 0 ]; then
     echo "- Nothing to do. Indices already created."
     exit 0
