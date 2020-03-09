@@ -32,6 +32,7 @@ services:
       - INVENIO_RATELIMIT_STORAGE_URL
       - INVENIO_SEARCH_ELASTIC_HOSTS
       - SEARCH_INDEX_PREFIX
+      - JSONSCHEMAS_RESOLVER_CLS
   lb:
     build: conf/haproxy/
     image: oarepo-lb
