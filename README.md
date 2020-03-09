@@ -54,6 +54,7 @@ The following environment variables are available by default (see [.env-example]
 - ``INVENIO_RATELIMIT_STORAGE_URL``
 - ``INVENIO_SEARCH_ELASTIC_HOSTS``
 - ``SEARCH_INDEX_PREFIX``
+- ``JSONSCHEMAS_RESOLVER_CLS``
 
 To use them in the `docker-compose` files, feel free to copy over and modify the `.env-example` to the `.env` file.
 Any additional environment variables that are supported by Invenio can be added to your environment.
