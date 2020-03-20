@@ -16,12 +16,14 @@ services:
     environment:
       - OAREPO_VERSION
       - OAREPO_ES_VERSION
-      - APP_ALLOWED_HOSTS
-      - APP_ENABLE_SECURE_HEADERS
-      - SERVER_NAME
       - OAREPO_ADMIN_PASSWORD
       - OAREPO_ADMIN_USER
-      - JSONSCHEMAS_HOST
+      - OAREPO_APP_ALLOWED_HOSTS
+      - OAREPO_SEARCH_ELASTIC_HOSTS
+      - INVENIO_APPLICATION_ROOT
+      - INVENIO_SERVER_NAME
+      - INVENIO_APP_ENABLE_SECURE_HEADERS
+      - INVENIO_JSONSCHEMAS_HOST
       - INVENIO_SQLALCHEMY_DATABASE_URI
       - INVENIO_BROKER_URL
       - INVENIO_CELERY_BROKER_URL
@@ -30,30 +32,29 @@ services:
       - INVENIO_CACHE_REDIS_URL
       - INVENIO_ACCOUNTS_SESSION_REDIS_URL
       - INVENIO_RATELIMIT_STORAGE_URL
-      - INVENIO_SEARCH_ELASTIC_HOSTS
-      - SEARCH_INDEX_PREFIX
-      - JSONSCHEMAS_RESOLVER_CLS
+      - INVENIO_SEARCH_INDEX_PREFIX
+      - INVENIO_JSONSCHEMAS_RESOLVER_CLS
   lb:
     build: conf/haproxy/
     image: oarepo-lb
     restart: "always"
     ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
+#      - "80:80"
+       - "127.0.0.1:443:443"
+#      - "8080:8080"
   frontend:
     build: conf/nginx/
     image: oarepo-frontend
     restart: "always"
-    ports:
-      - "80"
-      - "443"
+#    ports:
+#      - "80"
+#      - "443"
   cache:
     image: redis
     restart: "always"
     read_only: true
-    ports:
-      - "6379:6379"
+#    ports:
+#      - "6379:6379"
   db:
     image: postgres:9.6
     restart: "always"
@@ -61,14 +62,14 @@ services:
       - "POSTGRES_USER=oarepo"
       - "POSTGRES_PASSWORD=oarepo"
       - "POSTGRES_DB=oarepo"
-    ports:
-      - "5432:5432"
+#    ports:
+#      - "5432:5432"
   mq:
     image: rabbitmq:3-management
     restart: "always"
-    ports:
-      - "15672:15672"
-      - "5672:5672"
+#    ports:
+#      - "15672:15672"
+#      - "5672:5672"
   es7:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.6.0
     restart: "always"
@@ -81,9 +82,9 @@ services:
         soft: -1
         hard: -1
     mem_limit: 1g
-    ports:
-      - "9200:9200"
-      - "9300:9300"
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
   es6:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.0
     restart: "always"
@@ -96,18 +97,18 @@ services:
         soft: -1
         hard: -1
     mem_limit: 1g
-    ports:
-      - "9200:9200"
-      - "9300:9300"
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:7.6.0
     environment:
       - "ELASTICSEARCH_HOSTS=http://es:9200"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - "5601:5601"
+#    ports:
+#      - "5601:5601"
   flower:
     image: mher/flower
     command: --broker=amqp://guest:guest@mq:5672/ --broker_api=http://guest:guest@mq:15672/api/
-    ports:
-      - "5555:5555"
+#    ports:
+#      - "5555:5555"

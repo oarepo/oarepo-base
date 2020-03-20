@@ -35,15 +35,16 @@ The following environment variables are available by default (see [.env-example]
 
 - ``OAREPO_VERSION=3.2.1``
 - ``OAREPO_ES_VERSION=es7``
+- ``OAREPO_ADMIN_PASSWORD``
+- ``OAREPO_ADMIN_USER``
+- ``OAREPO_APP_ALLOWED_HOSTS``
+- ``OAREPO_SEARCH_ELASTIC_HOSTS``
 - ``WORKING_DIR=/opt/invenio``
 - ``INVENIO_INSTANCE_PATH=/opt/invenio/var/instance``
 - ``INVENIO_USER_ID=1000``
-- ``APP_ALLOWED_HOSTS``
-- ``APP_ENABLE_SECURE_HEADERS``
-- ``SERVER_NAME``
-- ``OAREPO_ADMIN_PASSWORD``
-- ``OAREPO_ADMIN_USER``
-- ``JSONSCHEMAS_HOST``
+- ``INVENIO_APP_ENABLE_SECURE_HEADERS``
+- ``INVENIO_SERVER_NAME``
+- ``INVENIO_JSONSCHEMAS_HOST``
 - ``INVENIO_SQLALCHEMY_DATABASE_URI``
 - ``INVENIO_BROKER_URL``
 - ``INVENIO_CELERY_BROKER_URL``
@@ -52,9 +53,9 @@ The following environment variables are available by default (see [.env-example]
 - ``INVENIO_CACHE_REDIS_URL``
 - ``INVENIO_ACCOUNTS_SESSION_REDIS_URL``
 - ``INVENIO_RATELIMIT_STORAGE_URL``
-- ``INVENIO_SEARCH_ELASTIC_HOSTS``
-- ``SEARCH_INDEX_PREFIX``
-- ``JSONSCHEMAS_RESOLVER_CLS``
+- ``INVENIO_SEARCH_INDEX_PREFIX``
+- ``INVENIO_JSONSCHEMAS_RESOLVER_CLS``
+- ``INVENIO_APPLICATION_ROOT``
 
 To use them in the `docker-compose` files, feel free to copy over and modify the `.env-example` to the `.env` file.
 Any additional environment variables that are supported by Invenio can be added to your environment.

@@ -31,8 +31,8 @@ services:
       service: app
     command: [ "deploy" ]
     image: "oarepo-base:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
-    ports:
-      - "5000"
+#    ports:
+#      - "5000"
     volumes:
       - uploaded_data:/opt/invenio/var/instance/data
       - archived_data:/opt/invenio/var/instance/archive
