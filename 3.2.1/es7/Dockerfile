@@ -26,6 +26,7 @@ RUN pip install pip-tools
 
 # Install oarepo deployment requirements
 COPY ./requirements.d /etc/requirements.d/
+COPY ./modules /usr/lib/
 RUN cat /etc/requirements.d/*.in | pip-compile -U -o .requirements.txt -
 RUN pip install -r .requirements.txt
 

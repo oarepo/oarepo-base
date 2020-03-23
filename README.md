@@ -38,7 +38,7 @@ The following environment variables are available by default (see [.env-example]
 - ``OAREPO_ADMIN_PASSWORD``
 - ``OAREPO_ADMIN_USER``
 - ``OAREPO_APP_ALLOWED_HOSTS``
-- ``OAREPO_SEARCH_ELASTIC_HOSTS``
+- ``INVENIO_SEARCH_ELASTIC_HOSTS``
 - ``WORKING_DIR=/opt/invenio``
 - ``INVENIO_INSTANCE_PATH=/opt/invenio/var/instance``
 - ``INVENIO_USER_ID=1000``
