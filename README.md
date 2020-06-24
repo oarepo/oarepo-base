@@ -1,3 +1,5 @@
+## Deprecation notice: this package is deprecated in favor of [oarepo-micro-api](https://github.com/oarepo/oarepo-micro-api)
+
 # oarepo-base
 [![Build Status](https://travis-ci.org/oarepo/oarepo-base.svg?branch=master)](https://travis-ci.org/oarepo/oarepo-base) [![image](https://img.shields.io/docker/automated/oarepo/oarepo-base.svg)](https://hub.docker.com/r/oarepo/oarepo-base/) [![image](https://img.shields.io/docker/build/oarepo/oarepo-base.svg)](https://hub.docker.com/r/oarepo/oarepo-base/builds/)
 
