@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -e
+
+cmd=$1
+
+run_post_install_hooks() {
+  # execute post install scripts
+  for f in /etc/pre_run.d/*.sh; do
+    if ! bash "$f" -H; then
+      echo "failed to execute: ${f}. exiting..."
+      exit 1
+    fi
+  done
+}
+
+case $cmd in
+"uwsgi")
+  run_post_install_hooks
+  uwsgi /etc/uwsgi/uwsgi_rest.ini
+  ;;
+"celery")
+  celery worker -A invenio_app.celery --loglevel="${INVENIO_CELERY_LOG_LEVEL:-INFO}"
+  ;;
+"deploy")
+  export DEPLOY=True
+  run_post_install_hooks
+  ;;
+esac

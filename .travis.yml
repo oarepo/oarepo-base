@@ -4,7 +4,7 @@ matrix:
   fast_finish: true
 
 python:
-  - 3.6
+  - 3.7
 
 services: docker
 
@@ -33,6 +33,7 @@ env:
 
   matrix:
     - OAREPO_VERSION=3.2.1 OAREPO_ES_VERSION=es7
+    - OAREPO_VERSION=3.3.0 OAREPO_ES_VERSION=es7
 
 before_install:
   - sudo apt-get update
