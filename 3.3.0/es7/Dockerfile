@@ -11,7 +11,7 @@
 # on CentOS 7 with Python 3 (https://github.com/inveniosoftware/docker-invenio)
 # and includes Pip, Node.js, NPM and some few standard libraries
 # Invenio and OARepo sites usually needs.
-FROM inveniosoftware/centos7-python:3.7
+FROM inveniosoftware/centos8-python:3.7
 
 ARG OAREPO_VERSION=3.3.0
 
