@@ -1,5 +1,2 @@
 oarepo~=3.3.0
 oarepo-micro-api>=1.0.2
-Babel>=2.4.0
-Flask-BabelEx>=0.9.3
-lxml>=3.5.0,<4.2.6
