@@ -32,7 +32,6 @@ env:
     - INVENIO_APPLICATION_ROOT=/api
 
   matrix:
-    - OAREPO_VERSION=3.2.1 OAREPO_ES_VERSION=es7
     - OAREPO_VERSION=3.3.0 OAREPO_ES_VERSION=es7
 
 before_install:
